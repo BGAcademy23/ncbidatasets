@@ -23,7 +23,7 @@ As useful as the web interface is, at times it's much more convenient to have a 
 
 With the NCBI Datasets CLI, you can do this process in a single step. Our CLI allows users to access not only genomes, but also genes, ortholog sets and virus genomes. 
 
-![](./datasets_schema.png)
+![](./images/datasets_schema.png)
 
 #### 1a. Installing NCBI Datasets <a name="installation"></a>
 
@@ -79,7 +79,7 @@ In this environment, we have the necessary tools installed for you to explore NC
 
 The NCBI Datasets CLI command structure is very intuitive. If you take a look at the diagram below, you will notice that the commands are built by choosing one option from each vertical rectangle. Let's start!
 
-![](./datasets-command.png)
+![](./images/datasets-command.png)
 
 The *datasets* CLI has even more filtering options than the web-interface. For example: for chromosome level assemblies, you can choose which chromosomes to download using the `--chromosomes` flag. Use the `--help` flag to see all available flags and options in *datasets*. 
 
@@ -238,7 +238,7 @@ To facilitate the visualization of metadata, you can use *dataformat* to convert
 In the diagram below, you can see all the different kinds of data reports avaialble and how to build the dataformat command. You can pipe the `datasets summary` output directly to *dataformat* using the flag `--as-json-lines` or you can use the flags `--package` or `--inputfile` if you're providing . 
 Each metadata report has its own list of fields and our schema is recorded in our [documentation pages](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/). 
 
-![](./dataformat-choice.png)
+![](./images/dataformat-choice.png)
 
 We can also use the `--help` flag to look at all options and fields. 
 
@@ -520,7 +520,7 @@ We have a [documentation](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/) page w
 
 Please explore our docs and feel free to reach out if you need help with any tasks. 
 
-![](./datasets-docs.png)
+![](./images/datasets-docs.png)
 
 
 #### 6. Bonus exercise: downloading a large number of genomes <a name="rehydration"></a>
