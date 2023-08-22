@@ -14,7 +14,7 @@
 
 NCBI Datasets comprises an API, a web-interface and a command-line tool (CLI). In this workshop, we already covered the web-interface and how it can be used to search and download for your genomes of interest. 
 
-![](./datasets_getting_started.png)
+![](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/datasets_getting_started.png))
 
 As useful as the web interface is, at times it's much more convenient to have a way of accessing genomes from a command-line environment. Let's say your working on your institution's high-performance computing (HPC) system and you need to download dozens (or hundreds of genomes). Even if you're using the Datasets web interface, this would potentially be a two step process: 
 
