@@ -19,9 +19,7 @@ By the end of this session you will be able to:
 
 ## Session Materials
 
-- [slides.pdf](slides.pdf)
 - [CLI Tutorial](NCBI-datasets-cli.md)
-
 
 ## Prerequisites
 
