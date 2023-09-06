@@ -17,6 +17,12 @@ By the end of this session you will be able to:
 1. How to find and download assembled genomes and related data on the web using NCBI Datasets
 2. How to find and download assembled genomes and related data using NCBI Datasets command-line tools
 
+## Session Materials
+
+- [slides.pdf](slides.pdf)
+- [CLI Tutorial](NCBI-datasets-cli.md)
+
+
 ## Prerequisites
 
 1. Understanding the terms genome assembly, reads, contigs
