@@ -2,7 +2,7 @@ image: gitpod/workspace-base
 
 tasks:
 - name: preview
-  command: gp preview https://github.com/BGAcademy23/ncbidatasets/blob/main/docs/NCBI-datasets-cli.md
+  command: gp preview https://raw.githubusercontent.com/BGAcademy23/ncbidatasets/main/docs/NCBI-datasets-cli.md
 
 - name: install mamba
   command: |
