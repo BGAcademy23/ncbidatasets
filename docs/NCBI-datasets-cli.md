@@ -27,7 +27,7 @@ With the NCBI Datasets CLI, you can do this process in a single step. Our CLI al
 
 #### 1a. Installing NCBI Datasets <a name="installation"></a>
 
-For this exercise, we will install the *datasets* CLI in the GitPod instance you are using. The same instructions can be followed to to install it on your own machine or HPC system.
+For this exercise, we will install the *datasets* CLI in the [GitPod](https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets) instance you are using. The same instructions can be followed to to install it on your own machine or HPC system.
 
 The list of commands below will accomplish the following tasks:  
 
