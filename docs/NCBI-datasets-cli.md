@@ -14,7 +14,7 @@
 
 NCBI Datasets comprises an API, a web-interface and a command-line tool (CLI). In this workshop, we already covered the web-interface and how it can be used to search and download for your genomes of interest. 
 
-![](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/datasets_getting_started.png))
+![](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/datasets_getting_started.png)
 
 As useful as the web interface is, at times it's much more convenient to have a way of accessing genomes from a command-line environment. Let's say your working on your institution's high-performance computing (HPC) system and you need to download dozens (or hundreds of genomes). Even if you're using the Datasets web interface, this would potentially be a two step process: 
 
@@ -31,12 +31,12 @@ For this exercise, we will install the *datasets* CLI in the [GitPod](https://gi
 
 The list of commands below will accomplish the following tasks:  
 
-1.  Create a new conda environment named `datasets` and install the *datasets* CLI tool in that new environment.  
+1. Create a new conda environment named `datasets` and install the *datasets* CLI tool and the UNIX tree tool (useful for visualizing the folder structure) in that new environment.  
 2. Activate the `datasets` environment.  
 3. Test the installation by calling the *datasets* CLI.
 
 ```
-conda create -n datasets -c conda-forge ncbi-datasets-cli -y
+conda create -n datasets -c conda-forge ncbi-datasets-cli tree -y
 conda activate datasets
 datasets
 ```
@@ -199,6 +199,8 @@ Archive:  octopus-genome-rna-prot.zip
   inflating: octopus-genome-rna-protein/ncbi_dataset/data/dataset_catalog.json  
 ``` 
 ```
+tree octopus-genome-rna-protein
+
 octopus-genome-rna-protein
 |-- README.md
 `-- ncbi_dataset
@@ -441,63 +443,51 @@ GCA_002925995.2 Terrapene carolina triunguis    Scaffold        24249581
 
 The assemblies are show in alphabetical order (scientific name) and we can see that for some species, like *Chrysemys picta bellii*, we have two assemblies with the same scaffold N50. If we check the accession numbers, we will see that we have a GCF and a GCA assembly (GCF\_000241765.5 and GCA\_000241765.5). GCA assemblies and their associate annotation files represent the original submission by users, while GCF assemblies are a copy of the original submission that was selected to be annotated and part of the RefSeq collection. You can read more about the differences between GCA and GCF assemblies in our [documentation page](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/troubleshooting/faq/#what-is-the-difference-between-a-genbank-gca-and-refseq-gcf-genome-assembly).
 
-Let's say that we decided that we only want one assembly per species. In this case, we can create a list of accessions and save it as a text file that can be used as input for *datasets*. Let's call this file `turtles.acc`:
+For the sake of brevity, let's download only the GCF assemblies. In this case, we can create a list of accessions and save it as a text file that can be used as input for *datasets*. Let's call this file `turtles-ref.acc`:
 
 ```
-GCA_009430475.1
-GCA_007922185.1
-GCA_007922165.1
 GCF_000241765.5
-GCA_004028625.2
-GCA_003846335.1
-GCA_007922305.1
-GCA_007922225.1
-GCA_007922155.1
 GCF_000230535.1
-GCA_007922175.1
-GCA_007922195.1
 GCF_002925995.2
 
 ```
+
+<details>
+<summary><b>Using nano to create a text file:</b></summary>
+
+---
+You can create a text file with a list of accessions anywhere that's convenient for you. The only thing to be aware is to use UTF-8 encoding for the file to avoid any issues.
+
+1. Open nano: `nano`
+2. Paste/type the list of accessions/identifiers you would like to use.   
+You can either right click and select "Paste" or use `Control + V` (Windows) or `Cmd + V` (Mac);
+3. Press `Control + X` to exit
+4. `Save modified buffer`: type `Y`
+5. Type the file name: `turtles.acc` and press `Enter`
+
+---
+
+</details>
 
 Now let's download the selected assemblies using *datasets*. In this case, we will download genomes by **accession** and not **taxon**:
 
 ```
 datasets download genome accession --inputfile turtles.acc --filename turtles_vgp-select.zip
-Collecting 13  records [================================================] 100% 13/13
-Downloading: turtles_vgp-select.zip    9.14GB done
+Collecting 3  records [================================================] 100% 3/3
+Downloading: turtles_vgp-select.zip    2.18GB done
 
 ```
 After downloading it, let's unzip the data package and take a look at its contents:
 
 ```
 unzip turtles_vgp-select.zip -d turtles-VGP
+
 tree turtles-VGP/
 
 turtles-VGP/
 |-- README.md
 `-- ncbi_dataset
     `-- data
-        |-- GCA_003846335.1
-        |   `-- GCA_003846335.1_ASM384633v1_genomic.fna
-        |-- GCA_004028625.2
-        |   `-- GCA_004028625.2_ASM402862v2_genomic.fna
-        |-- GCA_007922155.1
-        |   `-- GCA_007922155.1_Mesoclemmys_tuberculata-1.0_genomic.fna
-        |-- GCA_007922165.1
-        |   `-- GCA_007922165.1_Chelydra_serpentina-1.0_genomic.fna
-        |-- GCA_007922175.1
-        |   `-- GCA_007922175.1_Pelusios_castaneus-1.0_genomic.fna
-        |-- GCA_007922185.1
-        |   `-- GCA_007922185.1_Carettochelys_insculpta-1.0_genomic.fna
-        |-- GCA_007922195.1
-        |   `-- GCA_007922195.1_Podocnemis_expansa-1.0_genomic.fna
-        |-- GCA_007922225.1
-        |   `-- GCA_007922225.1_Emydura_subglobosa-1.0_genomic.fna
-        |-- GCA_007922305.1
-        |   `-- GCA_007922305.1_Dermatemys_mawii-1.0_genomic.fna
-        |-- GCA_009430475.1
-        |   `-- GCA_009430475.1_Amar_v1_genomic.fna
         |-- GCF_000230535.1
         |   `-- GCF_000230535.1_PelSin_1.0_genomic.fna
         |-- GCF_000241765.5
@@ -507,7 +497,7 @@ turtles-VGP/
         |-- assembly_data_report.jsonl
         `-- dataset_catalog.json
 
-15 directories, 16 files
+5 directories, 6 files
 ```	
 
 
@@ -540,8 +530,8 @@ We will use the same turtle download example with the `--dehydrated` flag and lo
 
 ```
 datasets download genome accession --inputfile turtles.acc --filename turtles_vgp-select-dehy.zip --dehydrated
-Collecting 13  records [================================================] 100% 13/13
-Downloading: turtles_vgp-select-dehy.zip    14kB done
+Collecting 3  records [================================================] 100% 3/3
+Downloading: turtles_vgp-select-dehy.zip    6.79kB done
 ```
 
 The first difference is the download size: 14KB dehydrated vs 9.14 GB regular download.
@@ -565,38 +555,19 @@ Now let's rehydrated this data package and see what happens:
 
 ```
 datasets rehydrate --directory turtles-vgp-dehydrated
-Found 13 of 13 files for rehydration
-Completed 13 of 13 [================================================] 100%
+Found 3 of 3 files for rehydration
+Completed 3 of 3 [================================================] 100%
 ```
 
 Let's look again at the folder `turtles-vgp-dehydrated` to see what changed:
 
 ```
 tree turtles-vgp-dehydrated/
+
 turtles-vgp-dehydrated/
 |-- README.md
 `-- ncbi_dataset
     |-- data
-    |   |-- GCA_003846335.1
-    |   |   `-- GCA_003846335.1_ASM384633v1_genomic.fna
-    |   |-- GCA_004028625.2
-    |   |   `-- GCA_004028625.2_ASM402862v2_genomic.fna
-    |   |-- GCA_007922155.1
-    |   |   `-- GCA_007922155.1_Mesoclemmys_tuberculata-1.0_genomic.fna
-    |   |-- GCA_007922165.1
-    |   |   `-- GCA_007922165.1_Chelydra_serpentina-1.0_genomic.fna
-    |   |-- GCA_007922175.1
-    |   |   `-- GCA_007922175.1_Pelusios_castaneus-1.0_genomic.fna
-    |   |-- GCA_007922185.1
-    |   |   `-- GCA_007922185.1_Carettochelys_insculpta-1.0_genomic.fna
-    |   |-- GCA_007922195.1
-    |   |   `-- GCA_007922195.1_Podocnemis_expansa-1.0_genomic.fna
-    |   |-- GCA_007922225.1
-    |   |   `-- GCA_007922225.1_Emydura_subglobosa-1.0_genomic.fna
-    |   |-- GCA_007922305.1
-    |   |   `-- GCA_007922305.1_Dermatemys_mawii-1.0_genomic.fna
-    |   |-- GCA_009430475.1
-    |   |   `-- GCA_009430475.1_Amar_v1_genomic.fna
     |   |-- GCF_000230535.1
     |   |   `-- GCF_000230535.1_PelSin_1.0_genomic.fna
     |   |-- GCF_000241765.5
@@ -607,14 +578,15 @@ turtles-vgp-dehydrated/
     |   `-- dataset_catalog.json
     `-- fetch.txt
 
-15 directories, 17 files
+5 directories, 7 files
 ```
 With exception to the file `fetch.txt`, now the folder structure looks the same as we had with the original (non-dehydrated) download.
 
---- 
+---
+### The most important question to answer is: why would I use this? 
 
-The most important question to answer is: **why would I use this?**  
-And the answer is: a deydrated download is faster and more reliable than a regular download, simply because the number of files and amount of data being transferred is smaller. Also, the download process is serial, which means that one file is downloaded after the other, while the rehydration process runs in parallel, where multiple files can be downloaded at the same time. By default, *datasets* downloads/rehydrates 10 files in parallel, and that number can go up to 30. Another advantage is that the rehydration process can be resumed if it is interrupted for any reason; the same is not true for downloads (they either finish successfully or fail and can't be resumed, only restarted from the beginning. 
+
+And the answer is: a dehydrated download is faster and more reliable than a regular download, simply because the number of files and amount of data being transferred is smaller. Also, the download process is serial, which means that one file is downloaded after the other, while the rehydration process runs in parallel, where multiple files can be downloaded at the same time. By default, *datasets* downloads/rehydrates 10 files in parallel, and that number can go up to 30. Another advantage is that the rehydration process can be resumed if it is interrupted for any reason; the same is not true for downloads: they either finish successfully or fail and can't be resumed, only restarted from the beginning. 
 
 ---
 
