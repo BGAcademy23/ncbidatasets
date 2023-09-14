@@ -455,19 +455,16 @@ GCF_002925995.2
 <details>
 <summary><b>Using nano to create a text file:</b></summary>
 
----  
-
 You can create a text file with a list of accessions anywhere that's convenient for you. The only thing to be aware is to use UTF-8 encoding for the file to avoid any issues.  
 
+```
 1. Open nano: `nano`   
 2. Paste/type the list of accessions/identifiers you would like to use.     
 You can either right click and select "Paste" or use `Control + V` (Windows) or `Cmd + V` (Mac)    
 3. Press `Control + X` to exit   
 4. `Save modified buffer`: type `Y`   
 5. Type the file name: `turtles.acc` and press `Enter`
-   
-
----
+```
 
 </details>
 
