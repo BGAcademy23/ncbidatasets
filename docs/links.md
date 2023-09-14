@@ -1,6 +1,6 @@
 # Links
 
-### BGA23 useful links:
+### BGA23:
 - Gitpod (for the CLI tutorial): [https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets](https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets)
 - Discord channel (for questions): [#searching-and-downloading-genome-data-using-ncbi-datasets](https://discord.gg/FsUPcVDC)
 
