@@ -1,0 +1,1187 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../links/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
+    
+    
+      
+        <title>CLI-Tutorial - ncbidatasets</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#searching-and-downloading-genome-data-using-ncbi-datasets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ncbidatasets" class="md-header__button md-logo" aria-label="ncbidatasets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ncbidatasets
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CLI-Tutorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ncbidatasets" class="md-nav__button md-logo" aria-label="ncbidatasets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ncbidatasets
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CLI-Tutorial
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CLI-Tutorial
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of contents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-ncbi-datasets-the-cli-version" class="md-nav__link">
+    1. NCBI Datasets: the CLI version 
+  </a>
+  
+    <nav class="md-nav" aria-label="1. NCBI Datasets: the CLI version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-installing-ncbi-datasets" class="md-nav__link">
+    1a. Installing NCBI Datasets 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-genome-retrieval-options" class="md-nav__link">
+    2. Genome retrieval options 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-using-the-datasets-cli-to-download-a-single-genome-assembly" class="md-nav__link">
+    3. Using the datasets CLI to download a single genome assembly 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-how-can-i-download-multiple-genomes-at-once-using-datasets" class="md-nav__link">
+    4. How can I download multiple genomes at once using datasets? 
+  </a>
+  
+    <nav class="md-nav" aria-label="4. How can I download multiple genomes at once using datasets?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4a-using-dataformat-to-explore-metadata" class="md-nav__link">
+    4a. Using dataformat to explore metadata 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-datasets-documentation-and-tutorials" class="md-nav__link">
+    5. Datasets documentation and tutorials 
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Datasets documentation and tutorials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6-bonus-exercise-downloading-a-large-number-of-genomes" class="md-nav__link">
+    6. Bonus exercise: downloading a large number of genomes 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-most-important-question-to-answer-is-why-would-i-use-this" class="md-nav__link">
+    The most important question to answer is: why would I use this?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Useful links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bga23.org" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BGA23
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of contents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-ncbi-datasets-the-cli-version" class="md-nav__link">
+    1. NCBI Datasets: the CLI version 
+  </a>
+  
+    <nav class="md-nav" aria-label="1. NCBI Datasets: the CLI version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-installing-ncbi-datasets" class="md-nav__link">
+    1a. Installing NCBI Datasets 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-genome-retrieval-options" class="md-nav__link">
+    2. Genome retrieval options 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-using-the-datasets-cli-to-download-a-single-genome-assembly" class="md-nav__link">
+    3. Using the datasets CLI to download a single genome assembly 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-how-can-i-download-multiple-genomes-at-once-using-datasets" class="md-nav__link">
+    4. How can I download multiple genomes at once using datasets? 
+  </a>
+  
+    <nav class="md-nav" aria-label="4. How can I download multiple genomes at once using datasets?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4a-using-dataformat-to-explore-metadata" class="md-nav__link">
+    4a. Using dataformat to explore metadata 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-datasets-documentation-and-tutorials" class="md-nav__link">
+    5. Datasets documentation and tutorials 
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Datasets documentation and tutorials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6-bonus-exercise-downloading-a-large-number-of-genomes" class="md-nav__link">
+    6. Bonus exercise: downloading a large number of genomes 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-most-important-question-to-answer-is-why-would-i-use-this" class="md-nav__link">
+    The most important question to answer is: why would I use this?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/bgacademy23/ncbidatasets/blob/main/docs/NCBI-datasets-cli.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="searching-and-downloading-genome-data-using-ncbi-datasets">Searching and Downloading Genome Data using NCBI Datasets<a class="headerlink" href="#searching-and-downloading-genome-data-using-ncbi-datasets" title="Permanent link">&para;</a></h1>
+<h3 id="table-of-contents">Table of contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="#datasets-cli">NCBI Datasets: the CLI version</a><br />
+    1a. <a href="#installation">Installing NCBI datasets</a></li>
+<li><a href="#genome-retrieval">Genome retrieval options</a>. </li>
+<li><a href="#single-genome">Using the <em>datasets</em> CLI to download a single genome assembly</a></li>
+<li><a href="#multiple-genomes">How can I download multiple genomes at once using <em>datasets</em>?</a><br />
+    4a. <a href="#genome-metadata">Using <em>dataformat</em> to explore metadata</a></li>
+<li><a href="#docs">Datasets documentation and tutorials</a></li>
+<li><a href="#rehydration">Bonus exercise: downloading a large number of genomes</a></li>
+</ol>
+<h3 id="1-ncbi-datasets-the-cli-version">1. NCBI Datasets: the CLI version <a name="datasets-cli"></a><a class="headerlink" href="#1-ncbi-datasets-the-cli-version" title="Permanent link">&para;</a></h3>
+<p>NCBI Datasets comprises an API, a web-interface and a command-line tool (CLI). In this workshop, we already covered the web-interface and how it can be used to search and download for your genomes of interest. </p>
+<p><img alt="" src="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/datasets_getting_started.png" /></p>
+<p>As useful as the web interface is, at times it's much more convenient to have a way of accessing genomes from a command-line environment. Let's say your working on your institution's high-performance computing (HPC) system and you need to download dozens (or hundreds of genomes). Even if you're using the Datasets web interface, this would potentially be a two step process: </p>
+<ol>
+<li>Download the genome data package locally;</li>
+<li>Transfer the files to the HPC system.</li>
+</ol>
+<p>With the NCBI Datasets CLI, you can do this process in a single step. Our CLI allows users to access not only genomes, but also genes, ortholog sets and virus genomes. </p>
+<p><img alt="" src="../images/datasets_schema.png" /></p>
+<h4 id="1a-installing-ncbi-datasets">1a. Installing NCBI Datasets <a name="installation"></a><a class="headerlink" href="#1a-installing-ncbi-datasets" title="Permanent link">&para;</a></h4>
+<p>For this exercise, we will install the <em>datasets</em> CLI in the <strong><a href="https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets">GitPod</a> instance</strong> you are using. The same instructions can be followed to to install it on your own machine or HPC system.</p>
+<p>The list of commands below will accomplish the following tasks:  </p>
+<ol>
+<li>Create a new conda environment named <code>datasets</code> and install the <em>datasets</em> CLI tool and the UNIX tree tool (useful for visualizing the folder structure) in that new environment.  </li>
+<li>Activate the <code>datasets</code> environment.  </li>
+<li>Test the installation by calling the <em>datasets</em> CLI.</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda create -n datasets -c conda-forge ncbi-datasets-cli tree -y
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda activate datasets
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>datasets
+</code></pre></div>
+The command <code>datasets</code> will print the help message below:  </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>datasets is a command-line tool that is used to query and download biological sequence data
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>across all domains of life from NCBI databases.
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Refer to NCBI&#39;s [download and install](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/) documentation for information about getting started with the command-line tools.
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Usage
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  datasets [command]
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Data Retrieval Commands
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  summary     Print a data report containing gene, genome or virus metadata
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  download    Download a gene, genome or virus dataset as a zip file
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  rehydrate   Rehydrate a downloaded, dehydrated dataset
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Miscellaneous Commands
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  completion  Generate autocompletion scripts
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>Flags
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>      --api-key string   Specify an NCBI API key
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>      --debug            Emit debugging info
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>      --help             Print detailed help about a datasets command
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>      --version          Print version of datasets
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Use datasets &lt;command&gt; --help for detailed help about a command.
+</code></pre></div>
+<h3 id="2-genome-retrieval-options">2. Genome retrieval options <a name="genome-retrieval"></a><a class="headerlink" href="#2-genome-retrieval-options" title="Permanent link">&para;</a></h3>
+<p>Today we're focusing on retrieving genome data and metadata using the NCBI Datasets CLI. We will explore the options available to download data and metadata, including filtering options. </p>
+<p>For this exercise, we will be the using an environment in Gitpod. You need your GitHub credentials to login to it. Here's the link to the NCBI Datasets pod: <link></p>
+<p>In this environment, we have the necessary tools installed for you to explore NCBI Datasets without the need to configure anything. When you decide to use NCBI Datasets on your own machine or HPC system, you need to install it. More information on how to install NCBI Datasets can be found in <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/">our documentation page</a>.</p>
+<p>The NCBI Datasets CLI command structure is very intuitive. If you take a look at the diagram below, you will notice that the commands are built by choosing one option from each vertical rectangle. Let's start!</p>
+<p><img alt="" src="../images/datasets-command.png" /></p>
+<p>The <em>datasets</em> CLI has even more filtering options than the web-interface. For example: for chromosome level assemblies, you can choose which chromosomes to download using the <code>--chromosomes</code> flag. Use the <code>--help</code> flag to see all available flags and options in <em>datasets</em>. </p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>datasets download genome taxon --help
+</code></pre></div>
+Result:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Flags
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>      --assembly-version string   Limit to &#39;latest&#39; assembly accession version or include &#39;all&#39; (latest + previous versions)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                                     (default &quot;latest&quot;)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>      --include string(,string)   Specify the data files to include (comma-separated).
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                                    * genome:     genomic sequence
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                                    * rna:        transcript
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                    * protein:    amnio acid sequences
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                    * cds:        nucleotide coding sequences
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                                    * gff3:       general feature file
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                                    * gtf:        gene transfer format
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                                    * gbff:       GenBank flat file
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                                    * seq-report: sequence report file
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                                    * none:       do not retrieve any sequence files
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                                     (default [genome])
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>      --reference                 Limit to reference genomes
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>      --tax-exact-match           Exclude sub-species when a species-level taxon is specified
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>Global Flags
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>      --annotated                Limit to annotated genomes
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>      --api-key string           Specify an NCBI API key
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>      --assembly-level string    Limit to genomes at one or more assembly levels (comma-separated):
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>                                   * chromosome
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>                                   * complete
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>                                   * contig
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>                                   * scaffold
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>                                    (default &quot;[]&quot;)
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>      --assembly-source string   Limit to &#39;RefSeq&#39; (GCF_) or &#39;GenBank&#39; (GCA_) genomes (default &quot;all&quot;)
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>      --chromosomes strings      Limit to a specified, comma-delimited list of chromosomes, or &#39;all&#39; for all chromosomes
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>      --debug                    Emit debugging info
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>      --dehydrated               Download a dehydrated zip archive including the data report and locations of data files (use the rehydrate command to retrieve data files).
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>      --exclude-atypical         Exclude atypical assemblies
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>      --filename string          Specify a custom file name for the downloaded data package (default &quot;ncbi_dataset.zip&quot;)
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>      --help                     Print detailed help about a datasets command
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>      --mag string               Limit to metagenome assembled genomes (only) or remove them from the results (exclude) (default &quot;all&quot;)
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>      --no-progressbar           Hide progress bar
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>      --preview                  Show information about the requested data package
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>      --released-after string    Limit to genomes released on or after a specified date (MM/DD/YYYY)
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>      --released-before string   Limit to genomes released on or before a specified date (MM/DD/YYYY)
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>      --search strings           Limit results to genomes with specified text in the searchable fields:
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>                                 species and infraspecies, assembly name and submitter.
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>                                 To search multiple strings, use the flag multiple times.
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>      --version                  Print version of datasets
+</code></pre></div>
+<h3 id="3-using-the-datasets-cli-to-download-a-single-genome-assembly">3. Using the <em>datasets</em> CLI to download a single genome assembly <a name="single-genome"></a><a class="headerlink" href="#3-using-the-datasets-cli-to-download-a-single-genome-assembly" title="Permanent link">&para;</a></h3>
+<p>For our first exercise, let's practive downloading a single genome using the <em>datasets</em> CLI. Imagine that you read a genomics paper about an organism that you are interested in (in this case, let's use the California two-spot octopus (<em>Octopus bimaculoides</em>) as our example. 
+The NCBI assembly accession for this species' reference genome is <code>GCF_001194135.2</code>, and you can use the command below to achieve this goal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>datasets download genome accession GCF_001194135.2 --filename octopus-bimaculoides-ref.zip
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Collecting 1  records [================================================] 100% 1/1
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Downloading: octopus-bimaculoides-ref.zip    643MB done
+</code></pre></div>
+<p>After downloading the data package, let's unzip it and take a look at the folder structure:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>unzip octopus-bimaculoides-ref.zip -d octopus-ref
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Archive:  octopus-bimaculoides-ref.zip
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  inflating: octopus-ref/README.md   
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  inflating: octopus-ref/ncbi_dataset/data/assembly_data_report.jsonl  
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  inflating: octopus-ref/ncbi_dataset/data/GCF_001194135.2/GCF_001194135.2_ASM119413v2_genomic.fna  
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  inflating: octopus-ref/ncbi_dataset/data/dataset_catalog.json  
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree octopus-ref
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>octopus-ref/
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>|-- README.md
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>`-- ncbi_dataset
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    `-- data
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        |-- GCF_001194135.2
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        |   `-- GCF_001194135.2_ASM119413v2_genomic.fna
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        |-- assembly_data_report.jsonl
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        `-- dataset_catalog.json
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>3 directories, 4 files
+</code></pre></div>
+<p>The folder structure of the data package downloaded with the CLI is the same as the one you would get from a web download. The genome assembly FASTA is located inside a folder identified with the assembly accession inside the <code>data</code> folder. The <code>data</code> folder also contains a metadata report (<code>assembly_data_report.jsonl</code>) and a catalog listing which files were included in the data package (<code>dataset_catalog.json</code>).</p>
+<p>In addition to the genome FASTA file, you might be interested in other files associated with this assembly, such as transcripts, proteins, GFF3, etc. To customize the data package, you can use the flag <code>--include</code> and list everything you would like to download. If the files are available, they will be included in your data package. Let's test that:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>datasets download genome accession GCF_001194135.2 --include genome,rna,protein --filename octopus-genome-rna-prot.zip
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Collecting 1  records [================================================] 100% 1/1
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Downloading: octopus-genome-rna-prot.zip    672MB done
+</code></pre></div>
+As we can see, this data package is a little bit larger than the one with only the genome FASTA, which is a good sign that the additional files were downloaded. Let's unzip it and see how their inclusion changed the folder structure:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>unzip octopus-genome-rna-prot.zip -d octopus-genome-rna-protein
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Archive:  octopus-genome-rna-prot.zip
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  inflating: octopus-genome-rna-protein/README.md  
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  inflating: octopus-genome-rna-protein/ncbi_dataset/data/assembly_data_report.jsonl  
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  inflating: octopus-genome-rna-protein/ncbi_dataset/data/GCF_001194135.2/GCF_001194135.2_ASM119413v2_genomic.fna  
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>  inflating: octopus-genome-rna-protein/ncbi_dataset/data/GCF_001194135.2/rna.fna  
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  inflating: octopus-genome-rna-protein/ncbi_dataset/data/GCF_001194135.2/protein.faa  
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>  inflating: octopus-genome-rna-protein/ncbi_dataset/data/dataset_catalog.json  
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree octopus-genome-rna-protein
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>octopus-genome-rna-protein
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>|-- README.md
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>`-- ncbi_dataset
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    `-- data
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        |-- GCF_001194135.2
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        |   |-- GCF_001194135.2_ASM119413v2_genomic.fna
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        |   |-- protein.faa
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        |   `-- rna.fna
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        |-- assembly_data_report.jsonl
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>        `-- dataset_catalog.json
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>3 directories, 6 files
+</code></pre></div></p>
+<p>As we can see, this new data package has two extra files in the same folder where the genome FASTA was in the first package we downloaded: <code>rna.fna</code> and <code>protein.faa</code>. </p>
+<p>Now, let's download multiple genomes at once.</p>
+<h3 id="4-how-can-i-download-multiple-genomes-at-once-using-datasets">4. How can I download multiple genomes at once using <em>datasets</em>? <a name="multiple-genomes"></a><a class="headerlink" href="#4-how-can-i-download-multiple-genomes-at-once-using-datasets" title="Permanent link">&para;</a></h3>
+<p>If we have a long list of genome accessions we want to retrieve, or maybe we want to download all genomes for a certain taxon, <em>datasets</em> CLI allows you to do that in a single command.</p>
+<p><img alt="Hawksbill sea turtle" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Eretmochelys-imbricata-K%C3%A9lonia-2.JPG" /></p>
+<p>Let's map out a strategy for doing this in the most efficient way possible. By efficient we mean: not downloading unnecessary files, since it costs time and storage to do so.   </p>
+<p>We can use a web/CLI approach, where we search for the genomes of interest on the web, or we can do everything in the command-line environment. We will explore the command-line only option, and to do so, we will use another CLI tool called <em>dataformat</em>, which is <em>datasets</em> companion tool to explore and convert metadata to TSV or Excel formats.</p>
+<h4 id="4a-using-dataformat-to-explore-metadata">4a. Using <em>dataformat</em> to explore metadata <a name="genome-metadata"></a><a class="headerlink" href="#4a-using-dataformat-to-explore-metadata" title="Permanent link">&para;</a></h4>
+<p>NCBI Datasets provides metadata reports in JSON or JSON-Lines format, and those can be retrieved in two different ways: 
+- using <code>datasets summary</code> option; or
+- as part of any data package.</p>
+<p>To facilitate the visualization of metadata, you can use <em>dataformat</em> to convert the JSON/JSON-Lines files to TSV or Excel format.</p>
+<p>In the diagram below, you can see all the different kinds of data reports avaialble and how to build the dataformat command. You can pipe the <code>datasets summary</code> output directly to <em>dataformat</em> using the flag <code>--as-json-lines</code> or you can use the flags <code>--package</code> or <code>--inputfile</code> if you're providing . 
+Each metadata report has its own list of fields and our schema is recorded in our <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/">documentation pages</a>. </p>
+<p><img alt="" src="../images/dataformat-choice.png" /></p>
+<p>We can also use the <code>--help</code> flag to look at all options and fields. </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>dataformat tsv genome --help
+</code></pre></div>
+<p>You can look at the output by clicking in the arrow below:</p>
+<details>
+<summary>Help output:</summary>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Flags
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>      --fields strings     Comma-separated list of fields
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>                               - accession
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>                               - ani-best-ani-match-ani
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>                               - ani-best-ani-match-assembly
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>                               - ani-best-ani-match-assembly_coverage
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>                               - ani-best-ani-match-category
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>                               - ani-best-ani-match-organism
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>                               - ani-best-ani-match-type_assembly_coverage
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>                               - ani-best-match-status
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>                               - ani-category
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>                               - ani-check-status
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>                               - ani-comment
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>                               - ani-submitted-ani-match-ani
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>                               - ani-submitted-ani-match-assembly
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>                               - ani-submitted-ani-match-assembly_coverage
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>                               - ani-submitted-ani-match-category
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>                               - ani-submitted-ani-match-organism
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>                               - ani-submitted-ani-match-type_assembly_coverage
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>                               - ani-submitted-organism
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>                               - ani-submitted-species
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>                               - annotinfo-busco-complete
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>                               - annotinfo-busco-duplicated
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>                               - annotinfo-busco-fragmented
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>                               - annotinfo-busco-lineage
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>                               - annotinfo-busco-missing
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>                               - annotinfo-busco-singlecopy
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>                               - annotinfo-busco-totalcount
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>                               - annotinfo-busco-ver
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>                               - annotinfo-featcount-gene-non-coding
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>                               - annotinfo-featcount-gene-other
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>                               - annotinfo-featcount-gene-protein-coding
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>                               - annotinfo-featcount-gene-pseudogene
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>                               - annotinfo-featcount-gene-total
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>                               - annotinfo-method
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>                               - annotinfo-name
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>                               - annotinfo-pipeline
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>                               - annotinfo-provider
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>                               - annotinfo-release-date
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>                               - annotinfo-release-version
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>                               - annotinfo-report-url
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>                               - annotinfo-software-version
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>                               - annotinfo-status
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>                               - assminfo-assembly-method
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>                               - assminfo-atypicalis-atypical
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>                               - assminfo-atypicalwarnings
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>                               - assminfo-bioproject
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>                               - assminfo-bioproject-lineage-accession
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>                               - assminfo-bioproject-lineage-parent-accession
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>                               - assminfo-bioproject-lineage-parent-accessions
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>                               - assminfo-bioproject-lineage-title
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>                               - assminfo-biosample-accession
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>                               - assminfo-biosample-attribute-name
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>                               - assminfo-biosample-attribute-value
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>                               - assminfo-biosample-bioproject-accession
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>                               - assminfo-biosample-bioproject-parent-accession
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>                               - assminfo-biosample-bioproject-parent-accessions
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>                               - assminfo-biosample-bioproject-title
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>                               - assminfo-biosample-description-comment
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>                               - assminfo-biosample-description-organism-common-name
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>                               - assminfo-biosample-description-organism-infraspecific-breed
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>                               - assminfo-biosample-description-organism-infraspecific-cultivar
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>                               - assminfo-biosample-description-organism-infraspecific-ecotype
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>                               - assminfo-biosample-description-organism-infraspecific-isolate
+<a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>                               - assminfo-biosample-description-organism-infraspecific-sex
+<a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>                               - assminfo-biosample-description-organism-infraspecific-strain
+<a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>                               - assminfo-biosample-description-organism-name
+<a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>                               - assminfo-biosample-description-organism-pangolin
+<a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a>                               - assminfo-biosample-description-organism-tax-id
+<a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>                               - assminfo-biosample-description-title
+<a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>                               - assminfo-biosample-ids-db
+<a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a>                               - assminfo-biosample-ids-label
+<a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>                               - assminfo-biosample-ids-value
+<a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>                               - assminfo-biosample-last-updated
+<a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>                               - assminfo-biosample-models
+<a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>                               - assminfo-biosample-owner-contact-lab
+<a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a>                               - assminfo-biosample-owner-name
+<a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a>                               - assminfo-biosample-package
+<a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>                               - assminfo-biosample-publication-date
+<a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>                               - assminfo-biosample-status-status
+<a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a>                               - assminfo-biosample-status-when
+<a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a>                               - assminfo-biosample-submission-date
+<a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>                               - assminfo-blast-url
+<a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a>                               - assminfo-description
+<a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>                               - assminfo-level
+<a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>                               - assminfo-linked-assm-accession
+<a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>                               - assminfo-linked-assm-type
+<a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>                               - assminfo-name
+<a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>                               - assminfo-notes
+<a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a>                               - assminfo-paired-assm-accession
+<a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a>                               - assminfo-paired-assm-changed
+<a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a>                               - assminfo-paired-assm-manual-diff
+<a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>                               - assminfo-paired-assm-name
+<a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a>                               - assminfo-paired-assm-only-genbank
+<a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a>                               - assminfo-paired-assm-only-refseq
+<a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a>                               - assminfo-paired-assm-status
+<a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a>                               - assminfo-refseq-category
+<a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a>                               - assminfo-release-date
+<a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a>                               - assminfo-sequencing-tech
+<a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a>                               - assminfo-status
+<a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a>                               - assminfo-submitter
+<a id="__codelineno-11-102" name="__codelineno-11-102" href="#__codelineno-11-102"></a>                               - assminfo-suppression-reason
+<a id="__codelineno-11-103" name="__codelineno-11-103" href="#__codelineno-11-103"></a>                               - assminfo-synonym
+<a id="__codelineno-11-104" name="__codelineno-11-104" href="#__codelineno-11-104"></a>                               - assminfo-type
+<a id="__codelineno-11-105" name="__codelineno-11-105" href="#__codelineno-11-105"></a>                               - assmstats-contig-l50
+<a id="__codelineno-11-106" name="__codelineno-11-106" href="#__codelineno-11-106"></a>                               - assmstats-contig-n50
+<a id="__codelineno-11-107" name="__codelineno-11-107" href="#__codelineno-11-107"></a>                               - assmstats-gaps-between-scaffolds-count
+<a id="__codelineno-11-108" name="__codelineno-11-108" href="#__codelineno-11-108"></a>                               - assmstats-gc-count
+<a id="__codelineno-11-109" name="__codelineno-11-109" href="#__codelineno-11-109"></a>                               - assmstats-gc-percent
+<a id="__codelineno-11-110" name="__codelineno-11-110" href="#__codelineno-11-110"></a>                               - assmstats-genome-coverage
+<a id="__codelineno-11-111" name="__codelineno-11-111" href="#__codelineno-11-111"></a>                               - assmstats-number-of-component-sequences
+<a id="__codelineno-11-112" name="__codelineno-11-112" href="#__codelineno-11-112"></a>                               - assmstats-number-of-contigs
+<a id="__codelineno-11-113" name="__codelineno-11-113" href="#__codelineno-11-113"></a>                               - assmstats-number-of-organelles
+<a id="__codelineno-11-114" name="__codelineno-11-114" href="#__codelineno-11-114"></a>                               - assmstats-number-of-scaffolds
+<a id="__codelineno-11-115" name="__codelineno-11-115" href="#__codelineno-11-115"></a>                               - assmstats-scaffold-l50
+<a id="__codelineno-11-116" name="__codelineno-11-116" href="#__codelineno-11-116"></a>                               - assmstats-scaffold-n50
+<a id="__codelineno-11-117" name="__codelineno-11-117" href="#__codelineno-11-117"></a>                               - assmstats-total-number-of-chromosomes
+<a id="__codelineno-11-118" name="__codelineno-11-118" href="#__codelineno-11-118"></a>                               - assmstats-total-sequence-len
+<a id="__codelineno-11-119" name="__codelineno-11-119" href="#__codelineno-11-119"></a>                               - assmstats-total-ungapped-len
+<a id="__codelineno-11-120" name="__codelineno-11-120" href="#__codelineno-11-120"></a>                               - checkm-completeness
+<a id="__codelineno-11-121" name="__codelineno-11-121" href="#__codelineno-11-121"></a>                               - checkm-completeness-percentile
+<a id="__codelineno-11-122" name="__codelineno-11-122" href="#__codelineno-11-122"></a>                               - checkm-contamination
+<a id="__codelineno-11-123" name="__codelineno-11-123" href="#__codelineno-11-123"></a>                               - checkm-marker-set
+<a id="__codelineno-11-124" name="__codelineno-11-124" href="#__codelineno-11-124"></a>                               - checkm-marker-set-rank
+<a id="__codelineno-11-125" name="__codelineno-11-125" href="#__codelineno-11-125"></a>                               - checkm-species-tax-id
+<a id="__codelineno-11-126" name="__codelineno-11-126" href="#__codelineno-11-126"></a>                               - checkm-version
+<a id="__codelineno-11-127" name="__codelineno-11-127" href="#__codelineno-11-127"></a>                               - current-accession
+<a id="__codelineno-11-128" name="__codelineno-11-128" href="#__codelineno-11-128"></a>                               - organelle-assembly-name
+<a id="__codelineno-11-129" name="__codelineno-11-129" href="#__codelineno-11-129"></a>                               - organelle-bioproject-accessions
+<a id="__codelineno-11-130" name="__codelineno-11-130" href="#__codelineno-11-130"></a>                               - organelle-description
+<a id="__codelineno-11-131" name="__codelineno-11-131" href="#__codelineno-11-131"></a>                               - organelle-infraspecific-name
+<a id="__codelineno-11-132" name="__codelineno-11-132" href="#__codelineno-11-132"></a>                               - organelle-submitter
+<a id="__codelineno-11-133" name="__codelineno-11-133" href="#__codelineno-11-133"></a>                               - organelle-total-seq-length
+<a id="__codelineno-11-134" name="__codelineno-11-134" href="#__codelineno-11-134"></a>                               - organism-common-name
+<a id="__codelineno-11-135" name="__codelineno-11-135" href="#__codelineno-11-135"></a>                               - organism-infraspecific-breed
+<a id="__codelineno-11-136" name="__codelineno-11-136" href="#__codelineno-11-136"></a>                               - organism-infraspecific-cultivar
+<a id="__codelineno-11-137" name="__codelineno-11-137" href="#__codelineno-11-137"></a>                               - organism-infraspecific-ecotype
+<a id="__codelineno-11-138" name="__codelineno-11-138" href="#__codelineno-11-138"></a>                               - organism-infraspecific-isolate
+<a id="__codelineno-11-139" name="__codelineno-11-139" href="#__codelineno-11-139"></a>                               - organism-infraspecific-sex
+<a id="__codelineno-11-140" name="__codelineno-11-140" href="#__codelineno-11-140"></a>                               - organism-infraspecific-strain
+<a id="__codelineno-11-141" name="__codelineno-11-141" href="#__codelineno-11-141"></a>                               - organism-name
+<a id="__codelineno-11-142" name="__codelineno-11-142" href="#__codelineno-11-142"></a>                               - organism-pangolin
+<a id="__codelineno-11-143" name="__codelineno-11-143" href="#__codelineno-11-143"></a>                               - organism-tax-id
+<a id="__codelineno-11-144" name="__codelineno-11-144" href="#__codelineno-11-144"></a>                               - source_database
+<a id="__codelineno-11-145" name="__codelineno-11-145" href="#__codelineno-11-145"></a>                               - type_material-display_text
+<a id="__codelineno-11-146" name="__codelineno-11-146" href="#__codelineno-11-146"></a>                               - type_material-label
+<a id="__codelineno-11-147" name="__codelineno-11-147" href="#__codelineno-11-147"></a>                               - wgs-contigs-url
+<a id="__codelineno-11-148" name="__codelineno-11-148" href="#__codelineno-11-148"></a>                               - wgs-project-accession
+<a id="__codelineno-11-149" name="__codelineno-11-149" href="#__codelineno-11-149"></a>                               - wgs-url
+<a id="__codelineno-11-150" name="__codelineno-11-150" href="#__codelineno-11-150"></a>  -h, --help               help for genome
+<a id="__codelineno-11-151" name="__codelineno-11-151" href="#__codelineno-11-151"></a>      --inputfile string   Input file
+<a id="__codelineno-11-152" name="__codelineno-11-152" href="#__codelineno-11-152"></a>      --package string     Data package (zip archive), inputfile parameter is relative to the root path inside the archive
+<a id="__codelineno-11-153" name="__codelineno-11-153" href="#__codelineno-11-153"></a>
+<a id="__codelineno-11-154" name="__codelineno-11-154" href="#__codelineno-11-154"></a>
+<a id="__codelineno-11-155" name="__codelineno-11-155" href="#__codelineno-11-155"></a>
+<a id="__codelineno-11-156" name="__codelineno-11-156" href="#__codelineno-11-156"></a>Global Flags
+<a id="__codelineno-11-157" name="__codelineno-11-157" href="#__codelineno-11-157"></a>      --elide-header   Do not output header
+<a id="__codelineno-11-158" name="__codelineno-11-158" href="#__codelineno-11-158"></a>      --force          Force dataformat to run without type check prompt
+</code></pre></div>
+
+</details>
+
+<p>For our question here, let's assume that we want to look at all available turtle genomes submitted by the Vertebrate Genomes Project, check their assembly level (<code>assminfo-level</code>), and scaffold N50 (<code>assmstats-scaffold-n50</code>), in addition to scientific name (<code>organism-name</code>) and NCBI assembly accession ID (<code>accession</code>). </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>datasets summary genome taxon turtles --as-json-lines --search &quot;Vertebrates Genome&quot; | dataformat tsv genome \
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>--fields accession,organism-name,assminfo-level,assmstats-scaffold-n50
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Assembly Accession      Organism Name   Assembly Level  Assembly Stats Scaffold N50
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>GCA_009430475.1 Actinemys marmorata     Scaffold        13640393
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>GCA_007922185.1 Carettochelys insculpta Scaffold        45881824
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>GCA_007922165.1 Chelydra serpentina     Scaffold        21135443
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>GCF_000241765.5 Chrysemys picta bellii  Chromosome      16028813
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>GCA_000241765.5 Chrysemys picta bellii  Chromosome      16028813
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>GCA_004028625.2 Cuora amboinensis       Scaffold        247606
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>GCA_003846335.1 Cuora mccordi   Scaffold        32628679
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>GCA_007922305.1 Dermatemys mawii        Scaffold        34365009
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>GCA_007922225.1 Emydura subglobosa      Scaffold        44759016
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>GCA_007922155.1 Mesoclemmys tuberculata Scaffold        46415247
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>GCF_000230535.1 Pelodiscus sinensis     Scaffold        3350749
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>GCA_000230535.1 Pelodiscus sinensis     Scaffold        3350749
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>GCA_007922175.1 Pelusios castaneus      Scaffold        14055032
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>GCA_007922195.1 Podocnemis expansa      Scaffold        37101370
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>GCF_002925995.2 Terrapene carolina triunguis    Scaffold        24249581
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>GCA_002925995.2 Terrapene carolina triunguis    Scaffold        24249581
+</code></pre></div>
+<p>The assemblies are show in alphabetical order (scientific name) and we can see that for some species, like <em>Chrysemys picta bellii</em>, we have two assemblies with the same scaffold N50. If we check the accession numbers, we will see that we have a GCF and a GCA assembly (GCF_000241765.5 and GCA_000241765.5). GCA assemblies and their associate annotation files represent the original submission by users, while GCF assemblies are a copy of the original submission that was selected to be annotated and part of the RefSeq collection. You can read more about the differences between GCA and GCF assemblies in our <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/troubleshooting/faq/#what-is-the-difference-between-a-genbank-gca-and-refseq-gcf-genome-assembly">documentation page</a>.</p>
+<p>For the sake of brevity, let's download only the GCF assemblies. In this case, we can create a list of accessions and save it as a text file that can be used as input for <em>datasets</em>. Let's call this file <code>turtles-ref.acc</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>GCF_000241765.5
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>GCF_000230535.1
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>GCF_002925995.2
+</code></pre></div>
+<details>
+<summary><b>Using dataformat to create a text file:</b></summary>
+
+In this case, since we are using only RefSeq genomes, we can use `dataformat` to help us create the input file with the accessions we need. Like this:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>datasets summary genome taxon turtles --as-json-lines --search &quot;Vertebrates Genome&quot; --assembly-source refseq | dataformat tsv genome --elide-header --fields accession
+</code></pre></div>
+
+</details>
+
+<details>
+<summary><b>Using nano to create a text file:</b></summary>
+
+You can create a text file with a list of accessions anywhere that's convenient for you. The only thing to be aware is to use UTF-8 encoding for the file to avoid any issues.  
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>1. Open nano: `nano`   
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>2. Paste/type the list of accessions/identifiers you would like to use.     
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>You can either right click and select &quot;Paste&quot; or use `Control + V` (Windows) or `Cmd + V` (Mac)    
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>3. Press `Control + X` to exit   
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>4. `Save modified buffer`: type `Y`   
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>5. Type the file name: `turtles.acc` and press `Enter`
+</code></pre></div>
+
+</details>
+
+<p>Now let's download the selected assemblies using <em>datasets</em>. In this case, we will download genomes by <strong>accession</strong> and not <strong>taxon</strong>:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>datasets download genome accession --inputfile turtles.acc --filename turtles_vgp-select.zip
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Collecting 3  records [================================================] 100% 3/3
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Downloading: turtles_vgp-select.zip    2.18GB done
+</code></pre></div>
+After downloading it, let's unzip the data package and take a look at its contents:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>unzip turtles_vgp-select.zip -d turtles-VGP
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>tree turtles-VGP/
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>turtles-VGP/
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>|-- README.md
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>`-- ncbi_dataset
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    `-- data
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>        |-- GCF_000230535.1
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>        |   `-- GCF_000230535.1_PelSin_1.0_genomic.fna
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>        |-- GCF_000241765.5
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>        |   `-- GCF_000241765.5_Chrysemys_picta_BioNano-3.0.4_genomic.fna
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>        |-- GCF_002925995.2
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>        |   `-- GCF_002925995.2_T_m_triunguis-2.0_genomic.fna
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>        |-- assembly_data_report.jsonl
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>        `-- dataset_catalog.json
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>5 directories, 6 files
+</code></pre></div>
+<h3 id="5-datasets-documentation-and-tutorials">5. Datasets documentation and tutorials <a name="docs"></a><a class="headerlink" href="#5-datasets-documentation-and-tutorials" title="Permanent link">&para;</a></h3>
+<p>We have a <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/">documentation</a> page with lots of information about about <em>datasets</em> and NCBI genome and assembly in general. Examples of information are:<br />
+- <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/">Command-line tools</a>: how to download and install the <em>datasets</em> CLI;<br />
+- <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/how-tos/">How-to guides</a>: short, one-line <em>datasets</em> CLI tasks;<br />
+- <a href="https://www.ncbi.nlm.nih.gov/datasets/docs/v2/tutorials/">Tutorials</a>: multi-task, longer tutorials, mostly based on feedback or questions we get from users;</p>
+<p>Please explore our docs and feel free to reach out if you need help with any tasks. </p>
+<p><img alt="" src="../images/datasets-docs.png" /></p>
+<h4 id="6-bonus-exercise-downloading-a-large-number-of-genomes">6. Bonus exercise: downloading a large number of genomes <a name="rehydration"></a><a class="headerlink" href="#6-bonus-exercise-downloading-a-large-number-of-genomes" title="Permanent link">&para;</a></h4>
+<p>By now, you've learned how to download a single or multiple genome assemblies and their associated annotation files. You also learned how to filter the download/metadata retrieval using the <em>datasets</em> CLI flags.</p>
+<p>In the examples we explored today, we were dealing with a relatively small number of genomes and download size. But it's not uncommon for our users to have download requests of thousands of genomes or hundreds of gigabytes of data. In those cases, we recommend users to use the "dehydration/rehydration" option in <em>datasets</em>. Some definitions:</p>
+<hr />
+<p><strong>Dehydrated data package</strong>: data package <strong><em>without</em></strong> any data files (FASTA, GFF3, etc), only the dataset catalog and assembly report. A dehydrated data package includes a <code>fetch.txt</code> file, with a list of files to be downloaded during rehydration.<br />
+<strong>Rehydration</strong>: to rehydrate a dehydrated data package means to download the data files that are listed in the <code>fetch.txt</code> file. Users can choose to download/rehydrate all files listed in the <code>fetch.txt</code> file or use the flag <code>--match</code> to part of the file names for rehydration.</p>
+<hr />
+<p>We will use the same turtle download example with the <code>--dehydrated</code> flag and look at the differences in the results.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>datasets download genome accession --inputfile turtles.acc --filename turtles_vgp-select-dehy.zip --dehydrated
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>Collecting 3  records [================================================] 100% 3/3
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Downloading: turtles_vgp-select-dehy.zip    6.79kB done
+</code></pre></div>
+<p>The first difference is the download size: 14KB dehydrated vs 9.14 GB regular download.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>unzip turtles_vgp-select-dehy.zip -d turtles-vgp-dehydrated
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>tree turtles-vgp-dehydrated/
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>turtles-vgp-dehydrated/
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>|-- README.md
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>`-- ncbi_dataset
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    |-- data
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    |   |-- assembly_data_report.jsonl
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    |   `-- dataset_catalog.json
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    `-- fetch.txt
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>2 directories, 4 files
+</code></pre></div>
+The second obvious difference is the absence of any data files or folders. 
+Now let's rehydrated this data package and see what happens:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>datasets rehydrate --directory turtles-vgp-dehydrated
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Found 3 of 3 files for rehydration
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Completed 3 of 3 [================================================] 100%
+</code></pre></div>
+<p>Let's look again at the folder <code>turtles-vgp-dehydrated</code> to see what changed:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>tree turtles-vgp-dehydrated/
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>turtles-vgp-dehydrated/
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>|-- README.md
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>`-- ncbi_dataset
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    |-- data
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    |   |-- GCF_000230535.1
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    |   |   `-- GCF_000230535.1_PelSin_1.0_genomic.fna
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>    |   |-- GCF_000241765.5
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    |   |   `-- GCF_000241765.5_Chrysemys_picta_BioNano-3.0.4_genomic.fna
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    |   |-- GCF_002925995.2
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>    |   |   `-- GCF_002925995.2_T_m_triunguis-2.0_genomic.fna
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>    |   |-- assembly_data_report.jsonl
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>    |   `-- dataset_catalog.json
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>    `-- fetch.txt
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>5 directories, 7 files
+</code></pre></div>
+With exception to the file <code>fetch.txt</code>, now the folder structure looks the same as we had with the original (non-dehydrated) download.</p>
+<hr />
+<h3 id="the-most-important-question-to-answer-is-why-would-i-use-this">The most important question to answer is: why would I use this?<a class="headerlink" href="#the-most-important-question-to-answer-is-why-would-i-use-this" title="Permanent link">&para;</a></h3>
+<p>And the answer is: a dehydrated download is faster and more reliable than a regular download, simply because the number of files and amount of data being transferred is smaller. Also, the download process is serial, which means that one file is downloaded after the other, while the rehydration process runs in parallel, where multiple files can be downloaded at the same time. By default, <em>datasets</em> downloads/rehydrates 10 files in parallel, and that number can go up to 30. Another advantage is that the rehydration process can be resumed if it is interrupted for any reason; the same is not true for downloads: they either finish successfully or fail and can't be resumed, only restarted from the beginning. </p>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../links/" class="md-footer__link md-footer__link--next" aria-label="Next: Useful links" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Useful links
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/BGAcademy23" target="_blank" rel="noopener" title="Biodiversity Genomics Academy 2023 on Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://genomic.social/@BGAcademy23" target="_blank" rel="noopener me" title="Biodiversity Genomics Academy 2023 on Mastodon - Genomic.Social" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>
