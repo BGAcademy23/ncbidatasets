@@ -4,6 +4,7 @@ edit_uri: https://github.com/bgacademy23/ncbidatasets/blob/main/docs
 nav:
     - Home: README.md
     - CLI-Tutorial: NCBI-datasets-cli.md
+    - Useful links: links.md
     - BGA23: https://bga23.org
 
 theme:
