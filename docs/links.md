@@ -2,7 +2,7 @@
 
 ### BGA23:
 - Gitpod (for the CLI tutorial): [https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets](https://gitpod.io/#https://github.com/BGAcademy23/ncbidatasets)
-- Discord channel (for questions): [#searching-and-downloading-genome-data-using-ncbi-datasets](https://discord.gg/FsUPcVDC)
+- Discord channel (for questions): [#searching-and-downloading-genome-data-using-ncbi-datasets](https://discord.com/channels/1132771970308649031/1147602310705459282)
 
 
 ### NCBI Datasets main resources
