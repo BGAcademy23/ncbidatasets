@@ -456,7 +456,9 @@ GCF_002925995.2
 
 In this case, since we are using only RefSeq genomes, we can use `dataformat` to help us create the input file with the accessions we need. Like this:
 
-`datasets summary genome taxon turtles --as-json-lines --search "Vertebrates Genome" --assembly-source refseq | dataformat tsv genome --elide-header --fields accession`
+```
+datasets summary genome taxon turtles --as-json-lines --search "Vertebrates Genome" --assembly-source refseq | dataformat tsv genome --elide-header --fields accession
+```
 
 </details>
 
