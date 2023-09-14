@@ -451,6 +451,15 @@ GCF_000230535.1
 GCF_002925995.2
 
 ```
+<details>
+<summary><b>Using dataformat to create a text file:</b></summary>
+
+In this case, since we are using only RefSeq genomes, we can use `dataformat` to help us create the input file with the accessions we need. Like this:
+
+`datasets summary genome taxon turtles --as-json-lines --search "Vertebrates Genome" --assembly-source refseq | dataformat tsv genome --elide-header --fields accession`
+
+</details>
+
 
 <details>
 <summary><b>Using nano to create a text file:</b></summary>
